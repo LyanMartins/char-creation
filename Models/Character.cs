@@ -1,0 +1,17 @@
+namespace Models
+{
+    public class Character : BaseModel
+    {
+        // name:string
+        // appearance:string
+        // nivel: int = 1
+        // experence:int = 0
+        // bio:string
+        public string name { get; set; }   
+        public string appearence { get; set; }  
+        public int nivel { get; set; }
+        public int experence { get; set; }  
+        public string bio { get; set; }
+    
+    }
+}
