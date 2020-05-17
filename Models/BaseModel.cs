@@ -1,4 +1,4 @@
-namespace Models
+namespace char_creation.Models
 {
     public class BaseModel
     {        

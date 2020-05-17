@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using MySQL.Data.EntityFrameworkCore;
 
-namespace Models
+namespace char_creation.Models
 {
     public class DatabaseContext : DbContext
     {

@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+@model CharacterViewModel
+
+@if(Model.error != null){
+    <div class="alert alert-danger" role="alert">
+      @Model.error
+    </div>
+}
+<section class="container">
+    <form asp-action="create" method="post">
+        <div class="form-group">
+            <label for="char-name">Name:</label>
+            <input type="text" class="form-control" id="char-name" name="name" placeholder="Entrer character name">
+        </div>
+        <div class="form-group">
+            <label for="char-apparence">Appearence:</label>
+            <input type="text" class="form-control" id="char-appearence" name="appearence" placeholder="Entrer character appearence">
+        </div>
+        <div class="form-group">
+            <label for="char-bio">Bio:</label>
+            <textarea type="text" class="form-control" id="char-bio" name="bio"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+    
+</section>  
+

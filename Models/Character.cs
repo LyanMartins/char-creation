@@ -1,4 +1,4 @@
-namespace Models
+namespace char_creation.Models
 {
     public class Character : BaseModel
     {
@@ -11,7 +11,6 @@ namespace Models
         public string appearence { get; set; }  
         public int nivel { get; set; }
         public int experence { get; set; }  
-        public string bio { get; set; }
-    
+        public string bio { get; set; }    
     }
 }

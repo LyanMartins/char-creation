@@ -9,7 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Models;
+using char_creation.Models;
+using char_creation.Repositories;
 
 namespace char_creation
 {
@@ -27,6 +28,8 @@ namespace char_creation
         {
             services.AddDbContext<DatabaseContext>();   
             services.AddControllersWithViews();
+
+            services.AddTransient<ICharacterRepository, CharacterRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
