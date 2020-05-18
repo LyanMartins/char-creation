@@ -12,5 +12,6 @@ namespace char_creation.Models
         public int nivel { get; set; }
         public int experence { get; set; }  
         public string bio { get; set; }    
+        public CharacterLineage characterLineage { get; set; }    
     }
 }

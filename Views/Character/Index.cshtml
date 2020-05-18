@@ -4,7 +4,7 @@
 
 @model CharacterViewModel
 
-@if(Model.error != null){
+@if(!string.IsNullOrEmpty(Model.error)){
     <div class="alert alert-danger" role="alert">
       @Model.error
     </div>
