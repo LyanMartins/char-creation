@@ -35,12 +35,12 @@ namespace char_creation.Controllers
                 
                 var character1 = _characterRepository.create(character);
                 CharacterViewModel characterViewModel = new CharacterViewModel(character1);
-                return View("index",characterViewModel);
+                return View("create",characterViewModel);
             }
             catch (Exception e)
             {
                 CharacterViewModel characterViewModel = new CharacterViewModel(e.Message);
-                return View("index",characterViewModel);
+                return View("create",characterViewModel);
             }
             
         }

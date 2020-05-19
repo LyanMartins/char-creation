@@ -5,7 +5,7 @@ namespace char_creation.Models.ViewModel
     public class CharacterViewModel
     {
         public Character character;
-        public string error;
+        public string error = null;
         public CharacterViewModel(Character character)
         {
             this.character = character;

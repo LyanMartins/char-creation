@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using char_creation.Models;
 
 namespace char_creation.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200519030425_AbilityRelation")]
+    partial class AbilityRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,6 +25,9 @@ namespace char_creation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("cost")
                         .HasColumnType("int");
 
@@ -33,6 +38,8 @@ namespace char_creation.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
 
                     b.ToTable("Ability");
                 });
@@ -75,6 +82,9 @@ namespace char_creation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("AbilityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("appearence")
                         .HasColumnType("text");
 
@@ -98,31 +108,13 @@ namespace char_creation.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AbilityId");
+
                     b.HasIndex("characterLineageId");
 
                     b.HasIndex("profissionId");
 
                     b.ToTable("Character");
-                });
-
-            modelBuilder.Entity("char_creation.Models.CharacterAbility", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("abilityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("characterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id", "abilityId", "characterId");
-
-                    b.HasIndex("abilityId");
-
-                    b.HasIndex("characterId");
-
-                    b.ToTable("CharacterAbility");
                 });
 
             modelBuilder.Entity("char_creation.Models.CharacterLineage", b =>
@@ -226,8 +218,19 @@ namespace char_creation.Migrations
                     b.ToTable("Profission");
                 });
 
+            modelBuilder.Entity("char_creation.Models.Ability", b =>
+                {
+                    b.HasOne("char_creation.Models.Character", null)
+                        .WithMany("ability")
+                        .HasForeignKey("CharacterId");
+                });
+
             modelBuilder.Entity("char_creation.Models.Character", b =>
                 {
+                    b.HasOne("char_creation.Models.Ability", null)
+                        .WithMany("character")
+                        .HasForeignKey("AbilityId");
+
                     b.HasOne("char_creation.Models.CharacterLineage", "characterLineage")
                         .WithMany()
                         .HasForeignKey("characterLineageId");
@@ -235,21 +238,6 @@ namespace char_creation.Migrations
                     b.HasOne("char_creation.Models.Profission", "profission")
                         .WithMany()
                         .HasForeignKey("profissionId");
-                });
-
-            modelBuilder.Entity("char_creation.Models.CharacterAbility", b =>
-                {
-                    b.HasOne("char_creation.Models.Ability", "ability")
-                        .WithMany("characterAbility")
-                        .HasForeignKey("abilityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("char_creation.Models.Character", "character")
-                        .WithMany("characterAbility")
-                        .HasForeignKey("characterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("char_creation.Models.CharacterLineage", b =>

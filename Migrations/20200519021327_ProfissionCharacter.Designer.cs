@@ -2,40 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using char_creation.Models;
 
 namespace char_creation.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200519021327_ProfissionCharacter")]
+    partial class ProfissionCharacter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("char_creation.Models.Ability", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("cost")
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("type")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ability");
-                });
 
             modelBuilder.Entity("char_creation.Models.Atributtes", b =>
                 {
@@ -103,26 +85,6 @@ namespace char_creation.Migrations
                     b.HasIndex("profissionId");
 
                     b.ToTable("Character");
-                });
-
-            modelBuilder.Entity("char_creation.Models.CharacterAbility", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("abilityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("characterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id", "abilityId", "characterId");
-
-                    b.HasIndex("abilityId");
-
-                    b.HasIndex("characterId");
-
-                    b.ToTable("CharacterAbility");
                 });
 
             modelBuilder.Entity("char_creation.Models.CharacterLineage", b =>
@@ -235,21 +197,6 @@ namespace char_creation.Migrations
                     b.HasOne("char_creation.Models.Profission", "profission")
                         .WithMany()
                         .HasForeignKey("profissionId");
-                });
-
-            modelBuilder.Entity("char_creation.Models.CharacterAbility", b =>
-                {
-                    b.HasOne("char_creation.Models.Ability", "ability")
-                        .WithMany("characterAbility")
-                        .HasForeignKey("abilityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("char_creation.Models.Character", "character")
-                        .WithMany("characterAbility")
-                        .HasForeignKey("characterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("char_creation.Models.CharacterLineage", b =>

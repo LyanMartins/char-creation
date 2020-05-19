@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace char_creation.Models
 {
     public class Character : BaseModel
@@ -13,5 +15,7 @@ namespace char_creation.Models
         public int experence { get; set; }  
         public string bio { get; set; }    
         public CharacterLineage characterLineage { get; set; }    
+        public Profission profission { get; set;}
+        public virtual List<CharacterAbility> characterAbility { get; set; }
     }
 }
