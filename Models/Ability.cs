@@ -11,6 +11,7 @@ namespace char_creation.Models
         public int cost { get; set; }  
         public string type { get; set; }
         public virtual ICollection<CharacterAbility> characterAbility { get; set; }
+        public TypeAbility typeAbility { get; set; }
     
     }
 }
